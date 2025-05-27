@@ -1,6 +1,6 @@
-# Cloning and Setting Up the Gml.Client Project
+# Cloning and Setting Up the Akvila.Client Project
 
-This guide will help you clone the `Gml.Client` project from GitHub, set up the development environment, and publish the
+This guide will help you clone the `Akvila.Client` project from GitHub, set up the development environment, and publish the
 project.
 
 ## Prerequisites
@@ -17,22 +17,22 @@ Before you begin, ensure that you have the following software installed on your 
 2. Run the following command to clone the repository:
 
     ```sh
-    git clone https://github.com/Gml-Launcher/Gml.Client.git
+    git clone https://github.com/AkvilaLauncher/Akvila.Client.git
     ```
 
 3. Navigate to the project directory:
 
     ```sh
-    cd Gml.Client
+    cd Akvila.Client
     ```
 
 ## Setting Up the Development Environment
 
 1. Open JetBrains Rider.
-2. Open the cloned `Gml.Client` project in Rider:
+2. Open the cloned `Akvila.Client` project in Rider:
 
     - Select `Open` from the welcome screen.
-    - Navigate to the `Gml.Client` project directory and select it.
+    - Navigate to the `Akvila.Client` project directory and select it.
 
 3. After the project is loaded, Rider will restore the necessary dependencies. This may take some time.
 
@@ -58,7 +58,7 @@ Before you begin, ensure that you have the following software installed on your 
 2. Navigate to the project directory if not already there:
 
     ```sh
-    cd Gml.Client
+    cd Akvila.Client
     ```
 
 3. Run the publish command using the .NET CLI:
@@ -75,12 +75,12 @@ If you'd like to contribute to the project, please fork the repository and creat
 adheres to the project's coding standards and passes all the tests.
 
 For any issues or feature requests, you can open an issue on
-the [GitHub Issues](https://github.com/Gml-Launcher/Gml.Client/issues) page of the repository.
+the [GitHub Issues](https://github.com/AkvilaLauncher/Akvila.Client/issues) page of the repository.
 
 ## Additional Resources
 
 - [JetBrains Rider Documentation](https://www.jetbrains.com/help/rider/Introduction.html)
 - [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/)
 
-By following the above steps, you should be able to set up, develop, and publish the `Gml.Client` project successfully.
+By following the above steps, you should be able to set up, develop, and publish the `Akvila.Client` project successfully.
 Happy coding!
