@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="AkvilaClientManager.cs">
+      <DependentUpon>IAkvilaClientManager.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Models\AuthUser.cs">
+      <DependentUpon>IUser.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.2" />
+    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24"/>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+    <PackageReference Include="Sentry" Version="4.13.0" />
+    <PackageReference Include="System.Reactive" Version="6.0.1"/>
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Akvila.Core.Interfaces\Akvila.Core.Interfaces.csproj" />
+    <ProjectReference Include="..\Akvila.Web.Api.Domains\Akvila.Web.Api.Domains.csproj" />
+    <ProjectReference Include="..\Akvila.Web.Api.Dto\Akvila.Web.Api.Dto.csproj" />
+  </ItemGroup>
+
+</Project>
