@@ -757,4 +757,19 @@ public class ApiProcedures {
         return JsonConvert.DeserializeObject<ResponseMessage<List<NewsReadDto>>>(content)
                ?? new ResponseMessage<List<NewsReadDto>>();
     }
+
+    public async Task<ResponseMessage<AuthTypeReadDto>> GetAuthType() {
+#if DEBUG
+        Debug.WriteLine("Calling GetAuthType()");
+#endif
+        var response = await _httpClient.GetAsync($"/api/v1/integrations/auth/active/type").ConfigureAwait(false);
+        var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        return JsonConvert.DeserializeObject<ResponseMessage<AuthTypeReadDto>>(content) ?? new ResponseMessage<AuthTypeReadDto>();
+    }
+    public string GetTextureUrl() {
+#if DEBUG
+        Debug.WriteLine("Calling GetTextureUrl()");
+#endif
+        return _httpClient.BaseAddress?.AbsoluteUri + "api/v1/integrations/texture/skins/";
+    }
 }

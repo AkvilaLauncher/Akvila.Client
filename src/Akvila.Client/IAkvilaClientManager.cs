@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Akvila.Web.Api.Dto.Files;
+using Akvila.Web.Api.Dto.Integration;
 using Akvila.Web.Api.Dto.Messages;
 using Akvila.Web.Api.Dto.Mods;
 using Akvila.Web.Api.Dto.News;
@@ -47,4 +48,7 @@ public interface IAkvilaClientManager : IDisposable {
                        CancellationToken cancellationToken = default);
 
     Task<ResponseMessage<List<NewsReadDto>>> GetNews();
+
+    Task<ResponseMessage<AuthTypeReadDto>> GetAuthType();
+    string GetTextureUrl();
 }

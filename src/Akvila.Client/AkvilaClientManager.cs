@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Akvila.Client.Helpers;
 using Akvila.Client.Extensions;
 using Akvila.Web.Api.Dto.Files;
+using Akvila.Web.Api.Dto.Integration;
 using Akvila.Web.Api.Dto.Messages;
 using Akvila.Web.Api.Dto.Mods;
 using Akvila.Web.Api.Dto.News;
@@ -38,8 +39,8 @@ public class AkvilaClientManager : IAkvilaClientManager {
         _osType = osType;
         _systemProcedures = new SystemIoProcedures(installationDirectory, osType);
         _apiProcedures = new ApiProcedures(new HttpClient {
-                                                              BaseAddress = hostUri
-                                                          }, osType);
+            BaseAddress = hostUri
+        }, osType);
 
         _apiProcedures.ProgressChanged.Subscribe(_progressChanged);
         _apiProcedures.LoadedFilesCount.Subscribe(_loadedFilesCount);
@@ -75,6 +76,13 @@ public class AkvilaClientManager : IAkvilaClientManager {
     public Task<ResponseMessage<List<NewsReadDto>>> GetNews() {
         return _apiProcedures.GetNews();
     }
+    public Task<ResponseMessage<AuthTypeReadDto>> GetAuthType() {
+        return _apiProcedures.GetAuthType();
+    }
+
+    public string GetTextureUrl() {
+        return _apiProcedures.GetTextureUrl();
+    }
 
     public Task<ResponseMessage<List<ModReadDto>>> GetOptionalMods(string profileName, string accessToken) {
         return _apiProcedures.GetOptionalMods(profileName, accessToken);
@@ -84,7 +92,8 @@ public class AkvilaClientManager : IAkvilaClientManager {
         try {
             var newFileName = _apiProcedures.ToggleOptionalMod(path, isEnebled);
             File.Move(path, newFileName);
-        } catch {
+        }
+        catch {
             return false;
         }
 
@@ -130,7 +139,7 @@ public class AkvilaClientManager : IAkvilaClientManager {
 
         var fs = new FileStream(tempFile.FullName, FileMode.OpenOrCreate);
         await content.Stream.CopyToAsync(fs, content.Bytes,
-                                         new Progress<int>(percentage => { _progressChanged.OnNext(percentage); }));
+            new Progress<int>(percentage => { _progressChanged.OnNext(percentage); }));
 
         _progressChanged.OnNext(100);
         fs.Close();
@@ -146,7 +155,7 @@ public class AkvilaClientManager : IAkvilaClientManager {
     }
 
     public async Task DownloadNotInstalledFiles(ProfileReadInfoDto profileInfo,
-                                                CancellationToken cancellationToken = default) {
+        CancellationToken cancellationToken = default) {
         var validateResult = await _systemProcedures.ValidateFilesAsync(profileInfo, InstallationDirectory);
 
         await _systemProcedures.RemoveFiles(InstallationDirectory, validateResult.ToDelete);
@@ -164,12 +173,12 @@ public class AkvilaClientManager : IAkvilaClientManager {
     }
 
     public async Task DownloadFiles(ProfileFileReadDto[] profileInfo,
-                                    CancellationToken cancellationToken = default) {
+        CancellationToken cancellationToken = default) {
         await _apiProcedures.DownloadFiles(InstallationDirectory, profileInfo.ToArray(), 60, cancellationToken);
     }
 
     public async Task<(IUser User, string Message, IEnumerable<string> Details)> Auth(string login, string password,
-                                                                                      string hwid) {
+        string hwid) {
         var user = await _apiProcedures.Auth(login, password, hwid);
 
         if (user.User?.IsAuth == true) {
