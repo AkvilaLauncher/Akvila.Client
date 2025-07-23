@@ -8,6 +8,7 @@ public class AuthUser : IUser {
     public DateTime ExpiredDate { get; set; }
     public DateTime RefreshExpiredDate { get; set; }
     public string TextureUrl { get; set; } = string.Empty;
+    public string SkinType { get; set; } = "CLASSIC";
     public bool IsAuth { get; set; }
     public bool Has2Fa { get; set; }
     public bool IsNotExpired => ExpiredDate != DateTime.MinValue && ExpiredDate > DateTime.Now;

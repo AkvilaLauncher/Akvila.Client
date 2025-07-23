@@ -11,4 +11,5 @@ public interface IUser {
     public DateTime ExpiredDate { get; set; }
     public DateTime RefreshExpiredDate { get; set; }
     public string TextureUrl { get; set; }
+    public string SkinType { get; set; }
 }
