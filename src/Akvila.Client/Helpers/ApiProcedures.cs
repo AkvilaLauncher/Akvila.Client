@@ -716,9 +716,6 @@ public class ApiProcedures {
         var response = await _httpClient.GetAsync($"/api/v1/profiles/{profileName}/mods")
             .ConfigureAwait(false);
 
-        Console.WriteLine(response);
-        Console.WriteLine(response.StatusCode);
-
         Debug.WriteLine(response.IsSuccessStatusCode ? "Success load" : "Failed load");
 
         if (!response.IsSuccessStatusCode)
