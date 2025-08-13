@@ -84,6 +84,10 @@ public class AkvilaClientManager : IAkvilaClientManager {
         return _apiProcedures.GetTextureUrl();
     }
 
+    public Task<ResponseMessage<List<ModReadDto>>> GetMods(string profileName, string accessToken) {
+        return _apiProcedures.GetMods(profileName, accessToken);
+    }
+
     public Task<ResponseMessage<List<ModReadDto>>> GetOptionalMods(string profileName, string accessToken) {
         return _apiProcedures.GetOptionalMods(profileName, accessToken);
     }

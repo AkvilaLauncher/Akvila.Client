@@ -41,6 +41,7 @@ public interface IAkvilaClientManager : IDisposable {
     Task OpenServerConnection(IUser user);
     void ChangeInstallationFolder(string installationDirectory);
     Task<IPlayerTexture?> GetTexturesByName(string userName);
+    Task<ResponseMessage<List<ModReadDto>>> GetMods(string profileName, string accessToken);
     Task<ResponseMessage<List<ModReadDto>>> GetOptionalMods(string profileName, string accessToken);
     bool ToggleOptionalMod(string path, bool isEnebled);
 

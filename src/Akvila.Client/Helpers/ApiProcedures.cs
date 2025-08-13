@@ -703,6 +703,37 @@ public class ApiProcedures {
                ?? new ResponseMessage<List<ModsDetailsInfoDto>>();
     }
 
+    public async Task<ResponseMessage<List<ModReadDto>>> GetMods(string profileName, string accessToken) {
+#if DEBUG
+        Debug.WriteLine("Calling GetMods()");
+#endif
+        Debug.Write("Load mods: ");
+        if (_httpClient.DefaultRequestHeaders.TryGetValues("Authorization", out _))
+            _httpClient.DefaultRequestHeaders.Remove("Authorization");
+
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+
+        var response = await _httpClient.GetAsync($"/api/v1/profiles/{profileName}/mods")
+            .ConfigureAwait(false);
+
+        Console.WriteLine(response);
+        Console.WriteLine(response.StatusCode);
+
+        Debug.WriteLine(response.IsSuccessStatusCode ? "Success load" : "Failed load");
+
+        if (!response.IsSuccessStatusCode)
+            return new ResponseMessage<List<ModReadDto>>();
+
+        var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#if DEBUG
+        Debug.WriteLine(response.IsSuccessStatusCode
+            ? $"Mods loaded successfully: {content}"
+            : "Failed to load mods.");
+#endif
+        return JsonConvert.DeserializeObject<ResponseMessage<List<ModReadDto>>>(content)
+               ?? new ResponseMessage<List<ModReadDto>>();
+    }
+
     public async Task<ResponseMessage<List<ModReadDto>>> GetOptionalMods(string profileName, string accessToken) {
 #if DEBUG
         Debug.WriteLine("Calling GetOptionalMods()");
