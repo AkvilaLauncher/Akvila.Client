@@ -19,9 +19,15 @@ public class BaseFileUpdateHandler : IFileUpdateHandler {
         }
 
         var files = Directory.GetFiles(profilePath, "*.*", SearchOption.AllDirectories);
-        var assetsFiles = Directory.GetFiles(Path.Combine(rootDirectory, "assets"), "*.*", SearchOption.AllDirectories);
-        var runtimeFiles =
-            Directory.GetFiles(Path.Combine(rootDirectory, "runtime"), "*.*", SearchOption.AllDirectories);
+
+        var assetsPath = Path.Combine(rootDirectory, "assets");
+        var runtimePath = Path.Combine(rootDirectory, "runtime");
+
+        Directory.CreateDirectory(assetsPath);
+        Directory.CreateDirectory(runtimePath);
+
+        var assetsFiles = Directory.GetFiles(assetsPath, "*.*", SearchOption.AllDirectories);
+        var runtimeFiles = Directory.GetFiles(runtimePath, "*.*", SearchOption.AllDirectories);
 
         foreach (var filePath in files.Concat(assetsFiles).Concat(runtimeFiles)) {
             var relativePath = Path.GetRelativePath(rootDirectory, filePath);
